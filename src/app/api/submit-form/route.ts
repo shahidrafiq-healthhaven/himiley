@@ -186,9 +186,9 @@ export async function POST(req: Request) {
 
     let emailSent = false;
     try {
-      const user = process.env.SMTP_USER;
-      const pass = process.env.SMTP_PASS;
-      const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587;
+      const user = process.env.SMTP_USER?.trim();
+      const pass = process.env.SMTP_PASS?.trim();
+      const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT.trim()) : 587;
       if (!user || !pass) {
         return NextResponse.json({ ok: false, error: "SMTP credentials missing" }, { status: 500 });
       }
