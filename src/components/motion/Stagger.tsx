@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { motion, type Variants } from "framer-motion";
 
 const groupVariants: Variants = {
@@ -25,13 +25,19 @@ const itemVariants: Variants = {
 };
 
 export function StaggerGroup({ children, className }: { children: ReactNode; className?: string }) {
+  // SSR / pre-hydration: visible. Enable stagger only after mount.
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    setReady(true);
+  }, []);
+
   return (
     <motion.div
       className={className}
       variants={groupVariants}
-      initial="hidden"
+      initial={ready ? "hidden" : false}
       whileInView="visible"
-      viewport={{ once: true, amount: 0.15, margin: "0px 0px -40px 0px" }}
+      viewport={{ once: true, amount: 0.05, margin: "0px 0px 0px 0px" }}
     >
       {children}
     </motion.div>

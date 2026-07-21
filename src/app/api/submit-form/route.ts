@@ -201,7 +201,7 @@ export async function POST(req: Request) {
       });
 
       await transporter.sendMail({
-        from: `Miley <${user}>`,
+        from: `Hi Miley <${user}>`,
         to,
         subject,
         html,

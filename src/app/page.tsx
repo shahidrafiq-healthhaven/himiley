@@ -181,7 +181,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col w-full font-inter overflow-x-hidden">
+    <div className="flex flex-col w-full font-inter overflow-x-clip">
       {/* Hero Section */}
       <section className="relative w-full bg-[#FCE8EB] overflow-hidden min-h-[560px] sm:min-h-[600px] lg:h-[650px] flex items-center">
         <div className="hidden sm:block absolute left-[-20%] top-[50%] -translate-y-1/2 w-[520px] h-[520px] lg:w-[750px] lg:h-[750px] z-[5] pointer-events-none">
@@ -401,11 +401,14 @@ export default function Home() {
       <section id="about-phexx" className="w-full py-14 sm:py-20 lg:py-24 bg-white border-t border-gray-100">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            <Reveal direction="left" className="relative h-[420px] sm:h-[520px] lg:h-[650px] w-full flex items-center justify-center lg:justify-start lg:pl-20 overflow-hidden">
-              <div className="img-zoom relative w-[260px] h-[260px] sm:w-[340px] sm:h-[340px] lg:w-[420px] lg:h-[420px] overflow-visible bg-[#4793AF]">
+            <Reveal
+              direction="left"
+              className="relative order-2 lg:order-1 min-h-[480px] sm:min-h-[560px] lg:min-h-[650px] w-full flex items-center justify-center lg:justify-start lg:pl-20 overflow-visible pt-16 sm:pt-20"
+            >
+              <div className="relative w-[260px] h-[260px] sm:w-[340px] sm:h-[340px] lg:w-[420px] lg:h-[420px] overflow-visible bg-[#4793AF]">
                 <Image src="/images/Rectangle 34624309.png" alt="" fill className="object-cover rounded-sm" />
 
-                <div className="absolute top-[-120px] sm:top-[-160px] bottom-[-80px] sm:bottom-[-100px] left-1/2 transform -translate-x-1/2 w-[240px] sm:w-[300px] lg:w-[400px] z-40 overflow-visible">
+                <div className="absolute top-[-140px] sm:top-[-180px] bottom-[-80px] sm:bottom-[-100px] left-1/2 transform -translate-x-1/2 w-[240px] sm:w-[300px] lg:w-[400px] z-40 overflow-visible">
                   <Image
                     src="/images/Applicator_with_Gel_version01_00000 1.png"
                     alt="Phexx Applicator"
@@ -417,7 +420,7 @@ export default function Home() {
               </div>
             </Reveal>
 
-            <Reveal direction="right" className="flex flex-col space-y-8">
+            <Reveal direction="right" className="order-1 lg:order-2 flex flex-col space-y-8">
               <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-bold text-[#111111] tracking-tight">What is Phexx?</h2>
 
               <div className="space-y-6">

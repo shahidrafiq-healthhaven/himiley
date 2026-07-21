@@ -57,10 +57,10 @@ const FAQS = [
 
 export default function PhexxiCostPage() {
   return (
-    <div className="flex flex-col w-full font-inter overflow-x-hidden">
+    <div className="flex flex-col w-full font-inter overflow-x-clip">
       {/* Hero */}
       <section className="w-full bg-gradient-to-br from-[#FCE8EB] to-[#FDF3EE] py-14 sm:py-20">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-10 items-start">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 items-start">
           <Reveal direction="up">
             <h1 className="text-[28px] sm:text-[38px] lg:text-[44px] font-bold text-[#111111] tracking-tight max-w-[700px] mb-5">
               What Determines the Price You Pay for Phexxi?
@@ -113,8 +113,8 @@ export default function PhexxiCostPage() {
             </p>
           </Reveal>
 
-          <Reveal direction="right" className="relative w-full h-[280px] lg:h-[420px] hidden lg:block img-zoom">
-            <Image src="/images/phexxi-cost-hero-applicator.png" alt="Phexx Applicator" fill className="object-contain" />
+          <Reveal direction="right" className="relative w-full h-[360px] lg:h-[520px] hidden lg:block img-zoom">
+            <Image src="/images/phexxi-cost-hero-applicator.png" alt="Phexx Applicator" fill className="object-contain object-center" />
           </Reveal>
         </div>
       </section>
@@ -168,7 +168,7 @@ export default function PhexxiCostPage() {
 
       {/* Comparison table */}
       <section className="w-full py-14 sm:py-20 bg-white">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 items-start">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-10 items-start">
           <div>
             <Reveal direction="up">
               <h2 className="text-[26px] sm:text-[32px] lg:text-[36px] font-bold text-[#111111] tracking-tight mb-10">
@@ -194,8 +194,8 @@ export default function PhexxiCostPage() {
             </StaggerGroup>
           </div>
 
-          <Reveal direction="right" className="relative w-full h-[280px] lg:h-[360px] hidden lg:block img-zoom">
-            <Image src="/images/phexxi-cost-comparison-hand.jpg" alt="Birth control pill and condom" fill className="object-contain" />
+          <Reveal direction="right" className="relative w-full h-[360px] lg:h-[460px] hidden lg:block img-zoom">
+            <Image src="/images/phexxi-cost-comparison-hand.jpg" alt="Birth control pill and condom" fill className="object-contain object-center" />
           </Reveal>
         </div>
       </section>
@@ -215,10 +215,10 @@ export default function PhexxiCostPage() {
       </section>
 
       {/* Image CTA Banner */}
-      <section className="w-full relative h-[380px] sm:h-[440px] lg:h-[500px] overflow-hidden">
+      <section className="w-full relative min-h-[420px] sm:min-h-[440px] lg:h-[500px] overflow-hidden">
         <Image src="/images/Rectangle 34624318.png" alt="" fill className="object-cover" />
         <div className="absolute inset-0 bg-black/40" />
-        <Reveal direction="up" className="relative z-10 max-w-[1200px] mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-end justify-between gap-6 pb-12 sm:pb-16">
+        <Reveal direction="up" className="relative z-10 max-w-[1200px] mx-auto lg:h-full px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 py-12 pb-16 sm:pb-16 lg:py-0 lg:pb-16">
           <h2 className="text-[26px] sm:text-[34px] lg:text-[40px] font-bold text-white tracking-tight max-w-[420px]">
             How to Get Phexxi Through Miley Health
           </h2>

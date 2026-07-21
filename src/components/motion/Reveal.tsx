@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { motion, type Variants } from "framer-motion";
 
 type Direction = "up" | "down" | "left" | "right" | "scale";
@@ -44,6 +44,13 @@ export function Reveal({
   as = "div",
   id,
 }: RevealProps) {
+  // SSR / pre-hydration: stay visible so mobile can scroll and read immediately.
+  // After mount, enable scroll-triggered reveal animations.
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    setReady(true);
+  }, []);
+
   const variants: Variants = {
     hidden: hiddenState(direction),
     visible: visibleState,
@@ -56,9 +63,9 @@ export function Reveal({
       id={id}
       className={className}
       variants={variants}
-      initial="hidden"
+      initial={ready ? "hidden" : false}
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2, margin: "0px 0px -40px 0px" }}
+      viewport={{ once: true, amount: 0.05, margin: "0px 0px 0px 0px" }}
       transition={{
         duration,
         delay,

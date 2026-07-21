@@ -51,7 +51,7 @@ const FAQS = [
 
 export default function BirthControlWithoutSideEffectsPage() {
   return (
-    <div className="flex flex-col w-full font-inter overflow-x-hidden">
+    <div className="flex flex-col w-full font-inter overflow-x-clip">
       {/* Hero */}
       <section className="w-full bg-gradient-to-br from-[#9D174D] to-[#D8386C] py-14 sm:py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -76,8 +76,8 @@ export default function BirthControlWithoutSideEffectsPage() {
               <Cta>Get Started</Cta>
             </Reveal>
           </div>
-          <Reveal direction="right" className="relative w-full h-[300px] sm:h-[400px] img-zoom">
-            <Image src="/images/phexxi-cost-hero-applicator.png" alt="Phexx Applicator" fill className="object-contain" />
+          <Reveal direction="right" className="relative w-full h-[380px] sm:h-[480px] lg:h-[520px] img-zoom">
+            <Image src="/images/phexxi-cost-hero-applicator.png" alt="Phexx Applicator" fill className="object-contain object-center" />
           </Reveal>
         </div>
       </section>
@@ -110,7 +110,7 @@ export default function BirthControlWithoutSideEffectsPage() {
       {/* A Birth Control Option Without Hormonal Side Effects */}
       <section className="w-full bg-[#FCE8EB] py-14 sm:py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-10 items-start">
-          <Reveal direction="left" className="relative w-[200px] h-[220px] sm:w-[220px] sm:h-[240px] mx-auto lg:mx-0 img-zoom">
+          <Reveal direction="left" className="relative w-[280px] h-[300px] sm:w-[320px] sm:h-[340px] mx-auto lg:mx-0 img-zoom">
             <Image src="/images/bcwe-woman-icon.png" alt="Hand holding Phexx applicator" fill className="object-contain" />
           </Reveal>
 

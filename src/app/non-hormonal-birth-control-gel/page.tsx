@@ -51,7 +51,7 @@ const FAQS = [
 
 export default function NonHormonalBirthControlGelPage() {
   return (
-    <div className="flex flex-col w-full font-inter overflow-x-hidden">
+    <div className="flex flex-col w-full font-inter overflow-x-clip">
       {/* Hero */}
       <section className="w-full bg-gradient-to-br from-[#FCE8EB] to-[#FDEDE3] py-14 sm:py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -66,8 +66,8 @@ export default function NonHormonalBirthControlGelPage() {
             </p>
             <Cta>Get Started</Cta>
           </Reveal>
-          <Reveal direction="right" className="relative w-full h-[280px] sm:h-[360px] img-zoom">
-            <Image src="/images/nhbc-hero-box.png" alt="Miley delivery box with Phexx applicator" fill className="object-contain" />
+          <Reveal direction="right" className="relative w-full h-[360px] sm:h-[460px] img-zoom">
+            <Image src="/images/nhbc-hero-box.png" alt="Miley delivery box with Phexx applicator" fill className="object-contain object-center" />
           </Reveal>
         </div>
       </section>

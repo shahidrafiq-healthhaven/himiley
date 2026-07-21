@@ -19,7 +19,7 @@ interface PolicyPageExperienceProps {
 
 export function PolicyPageExperience({ accentLabel, title, sections, contact, trailingParagraphs = {} }: PolicyPageExperienceProps) {
 	return (
-		<div className="relative flex w-full flex-col overflow-x-hidden font-inter">
+		<div className="relative flex w-full flex-col overflow-x-clip font-inter">
 			<PrivacyBackground />
 			<ReadingProgressBar />
 			<PolicyHero accentLabel={accentLabel} title={title} />

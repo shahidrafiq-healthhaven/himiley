@@ -51,10 +51,10 @@ const FAQS = [
 
 export default function VaginalContraceptiveGelPage() {
   return (
-    <div className="flex flex-col w-full font-inter overflow-x-hidden">
+    <div className="flex flex-col w-full font-inter overflow-x-clip">
       {/* Hero */}
       <section className="w-full bg-gradient-to-br from-[#CFE0EF] to-[#FDEDE3] py-14 sm:py-20">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_220px] gap-10 items-center">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 items-center">
           <div>
             <Reveal direction="up">
               <h1 className="text-[26px] sm:text-[34px] lg:text-[40px] font-bold text-[#111111] tracking-tight mb-5">
@@ -72,8 +72,8 @@ export default function VaginalContraceptiveGelPage() {
               <Cta>Get Started</Cta>
             </Reveal>
           </div>
-          <Reveal direction="right" className="relative w-full h-[260px] hidden lg:block img-zoom">
-            <Image src="/images/phexxi-cost-hero-applicator.png" alt="Phexx Applicator" fill className="object-contain" />
+          <Reveal direction="right" className="relative w-full h-[360px] lg:h-[480px] hidden lg:block img-zoom">
+            <Image src="/images/phexxi-cost-hero-applicator.png" alt="Phexx Applicator" fill className="object-contain object-center" />
           </Reveal>
         </div>
       </section>
@@ -105,7 +105,7 @@ export default function VaginalContraceptiveGelPage() {
 
       {/* Phexx: A Prescription Vaginal Contraceptive Gel */}
       <section className="w-full py-14 sm:py-20 bg-white border-t border-gray-100">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_220px] gap-10 items-start">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 items-start">
           <Reveal direction="left">
             <h2 className="text-[24px] sm:text-[30px] lg:text-[34px] font-bold text-[#111111] tracking-tight mb-6">
               Phexx: A Prescription Vaginal Contraceptive Gel
@@ -128,8 +128,8 @@ export default function VaginalContraceptiveGelPage() {
               ))}
             </ul>
           </Reveal>
-          <Reveal direction="right" className="relative w-full h-[220px] hidden lg:block img-zoom">
-            <Image src="/images/bcwe-woman-icon.png" alt="Hand holding Phexx applicator" fill className="object-contain" />
+          <Reveal direction="right" className="relative w-full h-[320px] hidden lg:block img-zoom">
+            <Image src="/images/bcwe-woman-icon.png" alt="Hand holding Phexx applicator" fill className="object-contain object-center" />
           </Reveal>
         </div>
       </section>
@@ -233,10 +233,10 @@ export default function VaginalContraceptiveGelPage() {
       </section>
 
       {/* Image CTA Banner */}
-      <section className="w-full relative h-[380px] sm:h-[440px] lg:h-[500px] overflow-hidden">
+      <section className="w-full relative min-h-[420px] sm:min-h-[440px] lg:h-[500px] overflow-hidden">
         <Image src="/images/Rectangle 34624318.png" alt="" fill className="object-cover" />
         <div className="absolute inset-0 bg-black/40" />
-        <Reveal direction="up" className="relative z-10 max-w-[1200px] mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-end justify-between gap-6 pb-12 sm:pb-16">
+        <Reveal direction="up" className="relative z-10 max-w-[1200px] mx-auto lg:h-full px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 py-12 pb-16 sm:pb-16 lg:py-0 lg:pb-16">
           <h2 className="text-[26px] sm:text-[34px] lg:text-[40px] font-bold text-white tracking-tight max-w-[420px]">
             Start Your Consultation Today
           </h2>

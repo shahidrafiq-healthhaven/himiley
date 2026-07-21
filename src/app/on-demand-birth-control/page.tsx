@@ -57,7 +57,7 @@ export default function OnDemandBirthControlPage() {
   const t = TESTIMONIALS[index];
 
   return (
-    <div className="flex flex-col w-full font-inter overflow-x-hidden">
+    <div className="flex flex-col w-full font-inter overflow-x-clip">
       {/* Hero */}
       <section className="w-full bg-gradient-to-br from-[#E3E7EA] to-[#FDEDE3] py-14 sm:py-20">
         <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -109,7 +109,7 @@ export default function OnDemandBirthControlPage() {
 
       {/* Birth Control That Works on Your Demand */}
       <section className="w-full bg-[#FCE8EB] py-14 sm:py-20">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-10 items-start">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 items-start">
           <Reveal direction="left">
             <h2 className="text-[24px] sm:text-[30px] lg:text-[34px] font-bold text-[#9D174D] tracking-tight mb-6">
               Birth Control That Works on Your Demand
@@ -134,8 +134,8 @@ export default function OnDemandBirthControlPage() {
             </ul>
           </Reveal>
 
-          <Reveal direction="right" className="relative w-full h-[220px] sm:h-[260px] hidden lg:block img-zoom">
-            <Image src="/images/nhbc-hero-box.png" alt="Miley delivery box with Phexx applicator" fill className="object-contain" />
+          <Reveal direction="right" className="relative w-full h-[300px] sm:h-[360px] hidden lg:block img-zoom">
+            <Image src="/images/nhbc-hero-box.png" alt="Miley delivery box with Phexx applicator" fill className="object-contain object-center" />
           </Reveal>
         </div>
       </section>

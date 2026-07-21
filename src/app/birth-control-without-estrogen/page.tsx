@@ -57,7 +57,7 @@ export default function BirthControlWithoutEstrogenPage() {
   const t = TESTIMONIALS[index];
 
   return (
-    <div className="flex flex-col w-full font-inter overflow-x-hidden">
+    <div className="flex flex-col w-full font-inter overflow-x-clip">
       {/* Hero */}
       <section className="w-full bg-gradient-to-br from-[#FCE8EB] to-[#FDEDE3] py-14 sm:py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -111,7 +111,7 @@ export default function BirthControlWithoutEstrogenPage() {
 
       {/* Hormone-Free Birth Control Accessible Online */}
       <section className="w-full bg-[#FCE8EB] py-14 sm:py-20">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_220px] gap-10 items-start">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 items-start">
           <Reveal direction="left">
             <h2 className="text-[24px] sm:text-[30px] lg:text-[34px] font-bold text-[#111111] tracking-tight mb-6">
               Hormone-Free Birth Control, Accessible Online
@@ -137,8 +137,8 @@ export default function BirthControlWithoutEstrogenPage() {
               ))}
             </ul>
           </Reveal>
-          <Reveal direction="right" className="relative w-full h-[240px] hidden lg:block img-zoom">
-            <Image src="/images/bcwe-woman-icon.png" alt="Hand holding Phexx applicator" fill className="object-contain" />
+          <Reveal direction="right" className="relative w-full h-[320px] hidden lg:block img-zoom">
+            <Image src="/images/bcwe-woman-icon.png" alt="Hand holding Phexx applicator" fill className="object-contain object-center" />
           </Reveal>
         </div>
       </section>

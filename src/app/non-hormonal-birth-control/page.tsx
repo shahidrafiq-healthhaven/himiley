@@ -51,7 +51,7 @@ const FAQS = [
 
 export default function NonHormonalBirthControlPage() {
   return (
-    <div className="flex flex-col w-full font-inter overflow-x-hidden">
+    <div className="flex flex-col w-full font-inter overflow-x-clip">
       {/* Hero */}
       <section className="w-full bg-gradient-to-br from-[#FCE8EB] to-[#FDEDE3] py-14 sm:py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -72,8 +72,8 @@ export default function NonHormonalBirthControlPage() {
               <Cta>Get Started</Cta>
             </Reveal>
           </div>
-          <Reveal direction="right" className="relative w-full h-[280px] sm:h-[360px] img-zoom">
-            <Image src="/images/nhbc-hero-box.png" alt="Miley delivery box with Phexx applicator" fill className="object-contain" />
+          <Reveal direction="right" className="relative w-full h-[360px] sm:h-[460px] img-zoom">
+            <Image src="/images/nhbc-hero-box.png" alt="Miley delivery box with Phexx applicator" fill className="object-contain object-center" />
           </Reveal>
         </div>
       </section>
@@ -106,7 +106,7 @@ export default function NonHormonalBirthControlPage() {
       {/* Hormone-Free Birth Control Accessible Online */}
       <section className="w-full bg-[#FCE8EB] py-14 sm:py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 items-start">
-          <Reveal direction="left" className="relative w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] mx-auto lg:mx-0 img-zoom">
+          <Reveal direction="left" className="relative w-[300px] h-[300px] sm:w-[360px] sm:h-[360px] mx-auto lg:mx-0 img-zoom">
             <Image src="/images/nhbc-woman-syringes.png" alt="Woman holding two Phexx applicators" fill className="object-contain" />
           </Reveal>
 

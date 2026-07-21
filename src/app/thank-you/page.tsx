@@ -13,7 +13,7 @@ export default async function ThankYouPage() {
 	}
 
 	return (
-		<div className="flex flex-col w-full font-inter overflow-x-hidden bg-white">
+		<div className="flex flex-col w-full font-inter overflow-x-clip bg-white">
 			<AutoRedirectHome />
 			<section className="w-full bg-[#FCE8EB] py-20 sm:py-24">
 				<div className="max-w-[900px] mx-auto px-6 text-center space-y-6">
