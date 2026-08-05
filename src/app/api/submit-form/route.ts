@@ -127,7 +127,7 @@ export async function POST(req: Request) {
         "Please list any current medications you're taking for the Pharmacist.",
       hasInsurance: "Do you have prescription insurance?",
       proceedInsurance:
-        "Most insurance covers Phexxi. However, there is a chance your insurance may not cover Phexxi. We will notify you. Would you like to proceed?",
+        "Most insurance plans cover Phexxi, but coverage is not guaranteed. If your plan does not cover it, we’ll notify you. By submitting, you agree to automatic refills, which you may cancel at any time. Would you like to proceed?",
     };
     const formatDob = (v: unknown) => {
       const s = String(v ?? "");

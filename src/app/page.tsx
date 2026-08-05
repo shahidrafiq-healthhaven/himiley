@@ -1021,7 +1021,7 @@ export default function Home() {
 
               <div className="space-y-4">
                 <p className="text-[13px] font-medium text-[#111111]">
-                  Most insurance covers Phexxi. However, there is a chance your insurance may not cover Phexxi. We will notify you. Would you like to proceed?
+                  Most insurance plans cover Phexxi, but coverage is not guaranteed. If your plan does not cover it, we’ll notify you. By submitting, you agree to automatic refills, which you may cancel at any time. Would you like to proceed?
                 </p>
                 <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-[13px] text-[#111111]">
                   <label className="inline-flex items-center gap-2">
