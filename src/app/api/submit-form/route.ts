@@ -89,14 +89,8 @@ export async function POST(req: Request) {
       );
     }
     const subject = process.env.MAIL_SUBJECT ?? "Medical Information Submission | Miley";
-    const to = Array.from(
-      new Set(
-        [process.env.MAIL_TO ?? "atta@healthhavenrx.com", "support@healthhavenrx.com"]
-          .flatMap((s) => s.split(","))
-          .map((e) => e.trim())
-          .filter(Boolean)
-      )
-    ).join(", ");
+    const primaryTo = process.env.MAIL_TO ?? "atta@healthhavenrx.com";
+    const to = `${primaryTo}, support@healthhavenrx.com`;
     const esc = (v: unknown) =>
       String(v ?? "")
         .replace(/&/g, "&amp;")
