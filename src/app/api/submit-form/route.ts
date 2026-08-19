@@ -151,7 +151,7 @@ export async function POST(req: Request) {
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f7f7f7">
         <tr><td>
           <div style="max-width:720px;margin:24px auto;background:#ffffff;border:1px solid #e5e5e5;border-radius:8px;overflow:hidden">
-            <div style="padding:18px 22px;background:#FF2F92;color:#fff;font-size:16px;font-weight:700">Miley |  Medical Information</div>
+            <div style="padding:18px 22px;background:#FF2F92;color:#fff;font-size:16px;font-weight:700">Hi Miley |  Medical Information</div>
             <div style="padding:18px 22px;color:#111">
               <p style="margin:0 0 10px 0;font-size:14px">A new submission was received.</p>
               <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;font-size:13px">
@@ -212,6 +212,52 @@ export async function POST(req: Request) {
       emailSent = false;
       const msg = e instanceof Error ? e.message : String(e);
       console.error("SMTP send error:", msg);
+    }
+
+    // Soft-fail dual-write to NextGen analytics (does not block thank-you flow)
+    try {
+      const analyticsUrl = process.env.NEXTGEN_ANALYTICS_URL?.trim();
+      const analyticsSecret = process.env.NEXTGEN_ANALYTICS_SECRET?.trim();
+      if (emailSent && analyticsUrl && analyticsSecret) {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 5000);
+        await fetch(analyticsUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Analytics-Ingest-Secret": analyticsSecret,
+          },
+          body: JSON.stringify({
+            websiteSource: "himiley.com",
+            brandLabel: "hi_miley",
+            emailFrom: `Hi Miley <${process.env.SMTP_USER || ""}>`,
+            emailSubject: subject,
+            htmlBanner: "Hi Miley | Medical Information",
+            firstName: value.firstName,
+            lastName: value.lastName,
+            email: value.email,
+            phone: value.phone,
+            dob: value.dob,
+            address: value.address,
+            address2: value.address2,
+            city: value.city,
+            state: value.state,
+            zip: value.zip,
+            country: value.country,
+            rawPayload: value,
+            receivedAt: new Date().toISOString(),
+          }),
+          signal: controller.signal,
+        }).catch((err) => {
+          console.error("Analytics ingest soft-fail:", err instanceof Error ? err.message : String(err));
+        });
+        clearTimeout(timeout);
+      }
+    } catch (e) {
+      console.error(
+        "Analytics ingest soft-fail:",
+        e instanceof Error ? e.message : String(e)
+      );
     }
 
     const response = NextResponse.json({

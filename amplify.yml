@@ -9,7 +9,7 @@ frontend:
         # Amplify console env vars are build-only by default; write them into
         # .env.production so Next.js API routes can read them at runtime.
         # See: https://docs.aws.amazon.com/amplify/latest/userguide/ssr-environment-variables.html
-        - env | grep -e SMTP_USER -e SMTP_PASS -e SMTP_PORT -e MAIL_TO -e MAIL_SUBJECT >> .env.production
+        - env | grep -e SMTP_USER -e SMTP_PASS -e SMTP_PORT -e MAIL_TO -e MAIL_SUBJECT -e NEXTGEN_ANALYTICS_URL -e NEXTGEN_ANALYTICS_SECRET >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
