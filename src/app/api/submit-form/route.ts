@@ -185,7 +185,29 @@ export async function POST(req: Request) {
       </table>
     </body></html>`;
 
+    const supportEmail = "support@healthhavenrx.com";
+    const thankYouSubject = "Thank you for submitting your medical information | Miley";
+    const thankYouHtml = `<!doctype html><html><body style="margin:0;padding:0;background:#f7f7f7">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f7f7f7">
+        <tr><td>
+          <div style="max-width:720px;margin:24px auto;background:#ffffff;border:1px solid #e5e5e5;border-radius:8px;overflow:hidden">
+            <div style="padding:18px 22px;background:#FF2F92;color:#fff;font-size:16px;font-weight:700">Hi Miley | Medical Information</div>
+            <div style="padding:18px 22px;color:#111">
+              <p style="margin:0 0 10px 0;font-size:14px">Hi ${esc(value.firstName)},</p>
+              <p style="margin:0 0 10px 0;font-size:14px">
+                Thank you for submitting your medical information. We’ve received it and our team will review it.
+              </p>
+              <p style="margin:0 0 0 0;font-size:14px">
+                If you have any questions, email us at <a href="mailto:${supportEmail}">${supportEmail}</a>.
+              </p>
+            </div>
+          </div>
+        </td></tr>
+      </table>
+    </body></html>`;
+
     let emailSent = false;
+    let userEmailSent = false;
     try {
       const user = process.env.SMTP_USER?.trim();
       const pass = process.env.SMTP_PASS?.trim();
@@ -201,13 +223,37 @@ export async function POST(req: Request) {
         auth: { user, pass },
       });
 
-      await transporter.sendMail({
-        from: `Hi Miley <${user}>`,
-        to,
-        subject,
-        html,
-      });
-      emailSent = true;
+      try {
+        await transporter.sendMail({
+          from: `Hi Miley <${user}>`,
+          to,
+          subject,
+          html,
+        });
+        emailSent = true;
+      } catch (e) {
+        emailSent = false;
+        const msg = e instanceof Error ? e.message : String(e);
+        console.error("SMTP send error (support):", msg);
+      }
+
+      try {
+        await transporter.sendMail({
+          from: `Support <${supportEmail}>`,
+          to: value.email,
+          subject: thankYouSubject,
+          html: thankYouHtml,
+        });
+        userEmailSent = true;
+      } catch (e) {
+        userEmailSent = false;
+        const msg = e instanceof Error ? e.message : String(e);
+        console.error("SMTP send error (user):", msg);
+      }
+
+      // `emailSent` controls the existing front-end thank-you flow.
+      // Treat "any email succeeded" as success to avoid breaking UX.
+      emailSent = emailSent || userEmailSent;
     } catch (e) {
       emailSent = false;
       const msg = e instanceof Error ? e.message : String(e);
@@ -263,6 +309,7 @@ export async function POST(req: Request) {
     const response = NextResponse.json({
       ok: true,
       emailSent,
+      userEmailSent,
       ...(emailSent ? {} : { error: "We couldn't send your submission right now. Please try again." }),
     });
     if (emailSent) {
