@@ -88,9 +88,10 @@ export async function POST(req: Request) {
         { status: 422 }
       );
     }
-    const subject = process.env.MAIL_SUBJECT ?? "Medical Information Submission | Miley";
-    const primaryTo = process.env.MAIL_TO ?? "atta@healthhavenrx.com";
-    const to = `${primaryTo}, support@healthhavenrx.com`;
+    const subject = process.env.MAIL_SUBJECT ?? "Medical Information Submission | Hi Miley";
+    // Testing: support@healthhavenrx.com temporarily removed — restore later
+    // const to = process.env.MAIL_TO ?? "atta@healthhavenrx.com, support@healthhavenrx.com";
+    const to = process.env.MAIL_TO ?? "atta@healthhavenrx.com";
     const esc = (v: unknown) =>
       String(v ?? "")
         .replace(/&/g, "&amp;")
@@ -151,7 +152,7 @@ export async function POST(req: Request) {
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f7f7f7">
         <tr><td>
           <div style="max-width:720px;margin:24px auto;background:#ffffff;border:1px solid #e5e5e5;border-radius:8px;overflow:hidden">
-            <div style="padding:18px 22px;background:#FF2F92;color:#fff;font-size:16px;font-weight:700">Hi Miley |  Medical Information</div>
+            <div style="padding:18px 22px;background:#FF2F92;color:#fff;font-size:16px;font-weight:700">Hi Miley | Medical Information</div>
             <div style="padding:18px 22px;color:#111">
               <p style="margin:0 0 10px 0;font-size:14px">A new submission was received.</p>
               <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;font-size:13px">
@@ -185,21 +186,22 @@ export async function POST(req: Request) {
       </table>
     </body></html>`;
 
-    const supportEmail = "support@healthhavenrx.com";
-    const thankYouSubject = "Thank you for submitting your medical information | Miley";
+    const supportEmail = "support@himiley.com";
+    const attaEmail = "atta@healthhavenrx.com";
+    const thankYouSubject = "Thank you for completing your medical information form | Hi Miley";
     const thankYouHtml = `<!doctype html><html><body style="margin:0;padding:0;background:#f7f7f7">
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f7f7f7">
         <tr><td>
           <div style="max-width:720px;margin:24px auto;background:#ffffff;border:1px solid #e5e5e5;border-radius:8px;overflow:hidden">
             <div style="padding:18px 22px;background:#FF2F92;color:#fff;font-size:16px;font-weight:700">Hi Miley | Medical Information</div>
-            <div style="padding:18px 22px;color:#111">
-              <p style="margin:0 0 10px 0;font-size:14px">Hi ${esc(value.firstName)},</p>
-              <p style="margin:0 0 10px 0;font-size:14px">
-                Thank you for submitting your medical information. We’ve received it and our team will review it.
-              </p>
-              <p style="margin:0 0 0 0;font-size:14px">
-                If you have any questions, email us at <a href="mailto:${supportEmail}">${supportEmail}</a>.
-              </p>
+            <div style="padding:18px 22px;color:#111;font-size:14px;line-height:1.5">
+              <p style="margin:0 0 12px 0">Hi ${esc(value.firstName)},</p>
+              <p style="margin:0 0 12px 0">Thank you for completing your medical information form with Miley Health.</p>
+              <p style="margin:0 0 12px 0">Our care team is now reviewing your submission and verifying your insurance. If approved, we’ll coordinate your prescription and keep you updated throughout the process.</p>
+              <p style="margin:0 0 12px 0">Most insurance plans cover Phexxi. If your insurance does not provide coverage, we’ll contact you before moving forward.</p>
+              <p style="margin:0 0 12px 0">If you have any questions, simply reply to this email.</p>
+              <p style="margin:0 0 12px 0">Thank you for choosing Miley Health!</p>
+              <p style="margin:0">The Miley Health Team</p>
             </div>
           </div>
         </td></tr>
@@ -215,13 +217,15 @@ export async function POST(req: Request) {
       if (!user || !pass) {
         return NextResponse.json({ ok: false, error: "SMTP credentials missing" }, { status: 500 });
       }
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        host: "smtp.gmail.com",
-        port,
-        secure: port === 465,
-        auth: { user, pass },
-      });
+      const makeGmailTransport = (authUser: string, authPass: string) =>
+        nodemailer.createTransport({
+          service: "gmail",
+          host: "smtp.gmail.com",
+          port,
+          secure: port === 465,
+          auth: { user: authUser, pass: authPass },
+        });
+      const transporter = makeGmailTransport(user, pass);
 
       try {
         await transporter.sendMail({
@@ -234,21 +238,29 @@ export async function POST(req: Request) {
       } catch (e) {
         emailSent = false;
         const msg = e instanceof Error ? e.message : String(e);
-        console.error("SMTP send error (support):", msg);
+        console.error("SMTP send error (internal):", msg);
       }
 
-      try {
-        await transporter.sendMail({
-          from: `Support <${supportEmail}>`,
-          to: value.email,
-          subject: thankYouSubject,
-          html: thankYouHtml,
-        });
-        userEmailSent = true;
-      } catch (e) {
-        userEmailSent = false;
-        const msg = e instanceof Error ? e.message : String(e);
-        console.error("SMTP send error (user):", msg);
+      const supportUser = process.env.SUPPORT_SMTP_USER?.trim();
+      const supportPass = process.env.SUPPORT_SMTP_PASS?.trim();
+      if (!supportUser || !supportPass) {
+        console.error("SMTP send error (user): SUPPORT_SMTP credentials missing");
+      } else {
+        try {
+          const supportTransporter = makeGmailTransport(supportUser, supportPass);
+          await supportTransporter.sendMail({
+            from: `Support <${supportEmail}>`,
+            to: value.email,
+            cc: `${attaEmail}, ${supportEmail}`,
+            subject: thankYouSubject,
+            html: thankYouHtml,
+          });
+          userEmailSent = true;
+        } catch (e) {
+          userEmailSent = false;
+          const msg = e instanceof Error ? e.message : String(e);
+          console.error("SMTP send error (user):", msg);
+        }
       }
 
       // `emailSent` controls the existing front-end thank-you flow.
