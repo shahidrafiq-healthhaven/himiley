@@ -187,7 +187,6 @@ export async function POST(req: Request) {
     </body></html>`;
 
     const supportEmail = "support@himiley.com";
-    const attaEmail = "atta@healthhavenrx.com";
     const thankYouSubject = "Thank you for completing your medical information form | Hi Miley";
     const thankYouHtml = `<!doctype html><html><body style="margin:0;padding:0;background:#f7f7f7">
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f7f7f7">
@@ -251,7 +250,7 @@ export async function POST(req: Request) {
           await supportTransporter.sendMail({
             from: `Support <${supportEmail}>`,
             to: value.email,
-            cc: `${attaEmail}, ${supportEmail}`,
+            cc: supportEmail,
             subject: thankYouSubject,
             html: thankYouHtml,
           });
