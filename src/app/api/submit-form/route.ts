@@ -89,9 +89,7 @@ export async function POST(req: Request) {
       );
     }
     const subject = process.env.MAIL_SUBJECT ?? "Medical Information Submission | Hi Miley";
-    // Testing: support@healthhavenrx.com temporarily removed — restore later
-    // const to = process.env.MAIL_TO ?? "atta@healthhavenrx.com, support@healthhavenrx.com";
-    const to = process.env.MAIL_TO ?? "atta@healthhavenrx.com";
+    const to = process.env.MAIL_TO ?? "atta@healthhavenrx.com, support@healthhavenrx.com";
     const esc = (v: unknown) =>
       String(v ?? "")
         .replace(/&/g, "&amp;")
